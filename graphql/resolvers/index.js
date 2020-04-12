@@ -1,6 +1,6 @@
-const itemResolvers = require("./item");
+import itemResolvers from "./item";
 
-module.exports = {
+export default {
   // Post: {
   //   likeCount: parent => parent.likes.length,
   //   commentCount: parent => parent.comments.length

@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const itemSchema = new mongoose.Schema({
   title: String,
@@ -6,4 +6,4 @@ const itemSchema = new mongoose.Schema({
   price: Number,
 });
 
-module.exports = mongoose.model("item", itemSchema);
+export default mongoose.model("item", itemSchema);

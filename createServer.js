@@ -1,9 +1,6 @@
-const { GraphQLServer } = require("graphql-yoga");
+import { GraphQLServer } from "graphql-yoga";
+import resolvers from "./graphql/resolvers";
 
-const resolvers = require("./graphql/resolvers");
-
-function createServer() {
+export default function createServer() {
   return new GraphQLServer({ typeDefs: "graphql/schema.graphql", resolvers, context: (req) => ({ ...req }) });
 }
-
-module.exports = createServer;

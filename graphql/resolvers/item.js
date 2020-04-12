@@ -1,8 +1,11 @@
-const Item = require("../../models/Item");
-const valideCreateItem = require("../../utils/validators/item");
-const { UserInputError } = require("apollo-server-core");
+// Model mongoose
+import Item from "../../models/Item";
+// Validator input
+import { valideCreateItem } from "../../utils/validators/item";
+// Error from Apollo
+import { UserInputError } from "apollo-server-core";
 
-module.exports = {
+export default {
   Query: {
     async getItems() {
       const items = await Item.find();

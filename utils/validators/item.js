@@ -1,4 +1,4 @@
-module.exports = valideCreateItem = (title, description, price) => {
+export const valideCreateItem = (title, description, price) => {
   const errors = {};
   if (title.trim() === "") errors.title = "Title must be not empty.";
   if (description === "") errors.description = "Description must be not empty.";

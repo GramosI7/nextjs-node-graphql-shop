@@ -3,25 +3,49 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import arrow from "../../public/svg/arrow-down.svg";
 import cross from "../../public/svg/cross.svg";
+import Link from "next/link";
 
 export default function Hamburger({ open, handleHamburger }) {
-  console.log(open);
+  const arrayOne = ["all", "new-arrivals", "dresses", "australien-wheels", "tops", "bottoms", "knitwears"];
+  const arrayTwo = ["about-us", "our-store", "for-our-planet", "rendez-vous"];
   return (
     <AnimatePresence>
       {open && (
         <ContainerHamburger initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
           <CrossImg src={cross} alt="cross" onClick={() => handleHamburger(false)} />
-          <HamburgerStyled initial="hidden" animate={open ? "visible" : "hidden"} variants={fadeRight}>
+          <HamburgerStyled initial="hidden" exit="hidden" animate={open ? "visible" : "hidden"} variants={fadeRight}>
             <HamburgerTop>
               <div className="search">Search</div>
               <div className="account">Account</div>
             </HamburgerTop>
             <HamburgerLists>
               <HamburgerListItem>
-                SHOP <ArrowImg src={arrow} alt="" />
+                <div className="flex">
+                  SHOP <ArrowImg src={arrow} alt="" />
+                </div>
+                <DropdownLists>
+                  {arrayOne.map((item, index) => (
+                    <li key={index}>
+                      <Link href={`/items/${item}`}>
+                        <a>{item}</a>
+                      </Link>
+                    </li>
+                  ))}
+                </DropdownLists>
               </HamburgerListItem>
               <HamburgerListItem>
-                OUR WORLDS <ArrowImg src={arrow} alt="" />
+                <div className="flex">
+                  OUR WORLDS <ArrowImg src={arrow} alt="" />
+                </div>
+                <DropdownLists>
+                  {arrayTwo.map((item, index) => (
+                    <li key={index}>
+                      <Link href={`/items/${item}`}>
+                        <a>{item}</a>
+                      </Link>
+                    </li>
+                  ))}
+                </DropdownLists>
               </HamburgerListItem>
             </HamburgerLists>
           </HamburgerStyled>
@@ -42,7 +66,7 @@ const fadeRight = {
   hidden: {
     x: "200%",
     transition: {
-      duration: 0.3,
+      duration: 0.5,
       delay: 0.1,
     },
   },
@@ -106,16 +130,45 @@ const HamburgerTop = styled.div`
 const HamburgerLists = styled.ul`
   list-style: none;
   display: grid;
-  grid-template-rows: repeat(2, 50px);
+`;
+
+const DropdownLists = styled.ul`
+  text-transform: uppercase;
+  width: 100%;
+  list-style: none;
+  display: grid;
+  grid-auto-rows: 40px;
+  align-items: center;
+  visibility: hidden;
+  grid-auto-rows: 0px;
+  li {
+    height: 100%;
+    padding-left: 30px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    display: grid;
+    align-items: center;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `;
 
 const HamburgerListItem = styled.li`
+  position: relative;
   cursor: pointer;
   padding: 0 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   border-top: 1px solid rgba(0, 0, 0, 0.1);
+  ${DropdownLists}:hover & {
+    visibility: visible;
+    grid-auto-rows: 40px;
+  }
+  .flex {
+    padding: 10px 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const ArrowImg = styled.img`

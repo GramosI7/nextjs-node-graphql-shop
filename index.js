@@ -1,6 +1,6 @@
 require("dotenv").config();
-const createServer = require("./createServer");
-const connectDB = require("./connectDB");
+import createServer from "./createServer";
+import connectDB from "./connectDB";
 
 const server = createServer();
 

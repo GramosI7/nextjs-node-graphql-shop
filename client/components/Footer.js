@@ -16,7 +16,7 @@ const Inner = styled.div`
   }
 `;
 
-const Lists = styled.div`
+const Lists = styled.ul`
   margin-top: 20px;
   list-style: none;
   display: grid;
