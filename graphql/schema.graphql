@@ -1,0 +1,19 @@
+type Dog {
+  name: String!
+}
+
+type Item {
+  title: String!
+  description: String!
+  price: Int!
+}
+
+type Query {
+  dogs: [Dog]!
+  getItems: [Item]!
+}
+
+type Mutation {
+  createDog(name: String!): Dog!
+  createItem(title: String!, description: String!, price: Int!): Item!
+}
