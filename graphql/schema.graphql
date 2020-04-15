@@ -1,10 +1,20 @@
+scalar Upload
+
 type Item {
   title: String!
   description: String!
+  image: [String!]!
   price: Int!
 }
 
+type Photo {
+  publicId: ID!
+  filename: String!
+  path: String!
+}
+
 type Query {
+  allPhotos: [Photo]!
   getItems: [Item]!
 }
 

@@ -3,6 +3,7 @@ import App from "next/app";
 // Graphql
 import { ApolloProvider } from "react-apollo";
 import withData from "../lib/withData";
+import "react-quill/dist/quill.snow.css";
 
 // Component
 import Layout from "../components/Layout/Layout";
@@ -11,6 +12,7 @@ import Layout from "../components/Layout/Layout";
 import styled, { ThemeProvider, createGlobalStyle } from "styled-components";
 
 const theme = {
+  white: "#ffffff",
   black: "#000000",
   grey: "#A9BED4",
   maxWidth: "1200px",

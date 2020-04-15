@@ -46,7 +46,7 @@ const NavLists = styled.nav`
 
 const RightSide = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 100px);
+  grid-template-columns: repeat(4, 100px);
   justify-content: flex-end;
   justify-items: center;
   align-items: center;
@@ -61,6 +61,7 @@ const InnerResponsive = styled.div`
     display: grid;
   }
   img {
+    cursor: pointer;
     justify-self: center;
     width: 112px;
   }
@@ -97,8 +98,17 @@ export default function Nav() {
             </nav>
           </LeftSide>
           <RightSide>
+            <div className="header__search">
+              <Link href="/create">
+                <a>CREATE</a>
+              </Link>
+            </div>
             <div className="header__search">SEARCH</div>
-            <div className="header__account">ACCOUNT</div>
+            <div className="header__account">
+              <Link href="/account">
+                <a>ACCOUNT</a>
+              </Link>
+            </div>
             <div className="header__cart">CART</div>
           </RightSide>
         </Inner>

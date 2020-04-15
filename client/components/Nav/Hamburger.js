@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import { motion, AnimatePresence } from "framer-motion";
 
-import arrow from "../../public/svg/arrow-down.svg";
 import cross from "../../public/svg/cross.svg";
-import Link from "next/link";
+import HamburgerItemDropdown from "./HamburgerItemDropdown";
 
 export default function Hamburger({ open, handleHamburger }) {
   const arrayOne = ["all", "new-arrivals", "dresses", "australien-wheels", "tops", "bottoms", "knitwears"];
@@ -19,34 +18,8 @@ export default function Hamburger({ open, handleHamburger }) {
               <div className="account">Account</div>
             </HamburgerTop>
             <HamburgerLists>
-              <HamburgerListItem>
-                <div className="flex">
-                  SHOP <ArrowImg src={arrow} alt="" />
-                </div>
-                <DropdownLists>
-                  {arrayOne.map((item, index) => (
-                    <li key={index}>
-                      <Link href={`/items/${item}`}>
-                        <a>{item}</a>
-                      </Link>
-                    </li>
-                  ))}
-                </DropdownLists>
-              </HamburgerListItem>
-              <HamburgerListItem>
-                <div className="flex">
-                  OUR WORLDS <ArrowImg src={arrow} alt="" />
-                </div>
-                <DropdownLists>
-                  {arrayTwo.map((item, index) => (
-                    <li key={index}>
-                      <Link href={`/items/${item}`}>
-                        <a>{item}</a>
-                      </Link>
-                    </li>
-                  ))}
-                </DropdownLists>
-              </HamburgerListItem>
+              <HamburgerItemDropdown title="Shop" items={arrayOne} />
+              <HamburgerItemDropdown title="Our World" items={arrayTwo} />
             </HamburgerLists>
           </HamburgerStyled>
         </ContainerHamburger>
@@ -91,7 +64,7 @@ const fade = {
 
 const ContainerHamburger = styled(motion.div)`
   overflow: hidden;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: absolute;
   top: 0;
@@ -130,55 +103,6 @@ const HamburgerTop = styled.div`
 const HamburgerLists = styled.ul`
   list-style: none;
   display: grid;
-`;
-
-const DropdownLists = styled.ul`
-  text-transform: uppercase;
-  width: 100%;
-  list-style: none;
-  display: grid;
-  grid-auto-rows: 40px;
-  align-items: center;
-  visibility: hidden;
-  grid-auto-rows: 0px;
-  li {
-    height: 100%;
-    padding-left: 30px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    display: grid;
-    align-items: center;
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-`;
-
-const HamburgerListItem = styled.li`
-  position: relative;
-  cursor: pointer;
-  padding: 0 15px;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  ${DropdownLists}:hover & {
-    visibility: visible;
-    grid-auto-rows: 40px;
-  }
-  .flex {
-    padding: 10px 0;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-`;
-
-const ArrowImg = styled.img`
-  width: 12px !important;
-  height: 12px;
-  margin-right: 5px;
-  padding-top: 5px;
-  display: inline;
-  transform-origin: center center;
-  transition: transform 0.3s ease;
 `;
 
 const CrossImg = styled.img`
