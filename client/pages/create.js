@@ -15,4 +15,5 @@ const Title = styled.h1`
   margin-top: 40px;
   text-align: center;
   text-transform: uppercase;
+  font-weight: 300;
 `;

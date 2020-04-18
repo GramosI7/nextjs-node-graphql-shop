@@ -1,31 +1,16 @@
-import React from "react";
-// import { Query } from "react-apollo";
-import { useQuery } from "@apollo/react-hooks";
-import gql from "graphql-tag";
-import Form from "../components/Form";
+// Styled Component
+import Container from "../components/styles/Container";
+import TitleH1 from "../components/styles/Title";
 
-const ALL_ITEM_QUERY = gql`
-  {
-    getItems {
-      title
-      description
-      price
-    }
-  }
-`;
+// Component
+import Home from "../components/Home/Home";
 
 export default function index() {
-  const { loading, error, data } = useQuery(ALL_ITEM_QUERY);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return `Error! ${error}`;
   return (
-    <div>
-      <h1>Home Page !</h1>
-      <p>I found {data.getItems.length} Item</p>
-      <Form />
-    </div>
+    <Container>
+      <TitleH1>Home</TitleH1>
+      <Home />
+    </Container>
   );
 }
-
-export { ALL_ITEM_QUERY };
+// export { ALL_ITEM_QUERY };

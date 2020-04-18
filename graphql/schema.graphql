@@ -1,23 +1,29 @@
-scalar Upload
-
 type Item {
+  _id: ID!
   title: String!
   description: String!
-  image: [String!]!
   price: Int!
+  image: [Photo!]!
 }
 
 type Photo {
-  publicId: ID!
-  filename: String!
-  path: String!
+  public_id: String!
+  url: String!
+  created_at: String!
+}
+
+input PhotoInput {
+  public_id: String!
+  url: String!
+  created_at: String!
 }
 
 type Query {
-  allPhotos: [Photo]!
+  getLimitItem(limit: Int!): [Item]!
+  getItem(_id: ID!): Item!
   getItems: [Item]!
 }
 
 type Mutation {
-  createItem(title: String!, description: String!, price: Int!): Item!
+  createItem(title: String!, description: String!, price: Int!, image: [PhotoInput!]!): Item!
 }

@@ -3,31 +3,29 @@ import { useDropzone } from "react-dropzone";
 import styled from "styled-components";
 import cross from "../../../public/svg/cross.svg";
 
-export default function Dropzone({ data, setFormData }) {
-  // const [files, setFiles] = useState([]);
+export default function Dropzone({ preview, setPreviewImg, error }) {
   const { getRootProps, getInputProps } = useDropzone({
     accept: "image/*",
     onDrop: (acceptedFiles) => {
-      setFormData({
-        ...data,
-        image: acceptedFiles.map((file) =>
+      setPreviewImg(
+        acceptedFiles.map((file) =>
           Object.assign(file, {
             preview: URL.createObjectURL(file),
           })
-        ),
-      });
+        )
+      );
     },
   });
 
   const deletePreview = (name) => {
-    setFormData({ ...data, image: data.image.filter((item) => item.name !== name) });
+    setPreviewImg(preview.filter((item) => item.name !== name));
   };
 
   useEffect(() => {
-    data.image.forEach((file) => URL.revokeObjectURL(file.preview));
-  }, [data]);
+    preview.forEach((file) => URL.revokeObjectURL(file.preview));
+  }, [preview]);
 
-  const thumbs = data.image.map((file) => (
+  const thumbs = preview.map((file) => (
     <Thumb key={file.name}>
       <ArrowImg onClick={() => deletePreview(file.name)} src={cross} alt="" />
       <ThumbInner>
@@ -37,12 +35,12 @@ export default function Dropzone({ data, setFormData }) {
   ));
 
   return (
-    <section className="container">
-      <ContainerInput {...getRootProps()}>
+    <section>
+      <ContainerInput error={error} {...getRootProps()}>
         <Input {...getInputProps()} />
         <Text>Drag 'n' drop some files here, or click to select files</Text>
       </ContainerInput>
-      {data.image.length > 0 && <ThumbsContainer>{thumbs}</ThumbsContainer>}
+      {preview.length > 0 && <ThumbsContainer>{thumbs}</ThumbsContainer>}
     </section>
   );
 }
@@ -80,7 +78,7 @@ const ThumbInner = styled.div`
 `;
 
 const ContainerInput = styled.div`
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  border: 1px solid ${(props) => (props.error ? "red" : "rgba(0, 0, 0, 0.2)")};
   text-align: center;
   height: 100px;
   background: #fafafa;

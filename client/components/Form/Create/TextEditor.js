@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import styled from "styled-components";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -24,7 +25,7 @@ const modules = {
  */
 const formats = ["header", "font", "size", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent"];
 
-export default ({ handleChange, valueProps }) => {
+export default ({ handleChange, valueProps, error }) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -33,5 +34,13 @@ export default ({ handleChange, valueProps }) => {
     // console.log(valueProps);
   }, [value]);
 
-  return <QuillNoSSRWrapper modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />;
+  return (
+    <WrapperEditor error={error}>
+      <QuillNoSSRWrapper modules={modules} formats={formats} value={value} onChange={setValue} theme="snow" />
+    </WrapperEditor>
+  );
 };
+
+const WrapperEditor = styled.div`
+  border: ${(props) => (props.error ? "1px solid red" : "inherit")};
+`;

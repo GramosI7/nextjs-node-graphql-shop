@@ -29,6 +29,7 @@ const GlobalStyle = createGlobalStyle`
   }
   html {
     font-size: 10px;
+    font-weight: 300; 
   }
   * {
     box-sizing: border-box;
@@ -48,15 +49,24 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 class MyApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    let pageProps = {};
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx);
+    }
+    // this exposes the query to the user
+    pageProps.query = ctx.query;
+    return { pageProps };
+  }
   render() {
-    const { Component, apollo } = this.props;
+    const { Component, apollo, pageProps } = this.props;
     return (
       <>
         <ApolloProvider client={apollo}>
           <ThemeProvider theme={theme}>
             <GlobalStyle />
             <Layout>
-              <Component />
+              <Component {...pageProps} />
             </Layout>
           </ThemeProvider>
         </ApolloProvider>
