@@ -11,6 +11,7 @@ const itemSchema = new mongoose.Schema({
       created_at: String,
     },
   ],
+  genre: String,
 });
 
 export default mongoose.model("item", itemSchema);

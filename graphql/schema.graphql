@@ -1,3 +1,17 @@
+enum Gender {
+  Male
+  Female
+}
+
+enum Permission {
+  ADMIN
+  USER
+}
+
+type SuccessMessage {
+  message: String
+}
+
 type Item {
   _id: ID!
   title: String!
@@ -18,12 +32,36 @@ input PhotoInput {
   created_at: String!
 }
 
+type User {
+  _id: ID!
+  email: String!
+  username: String!
+  createdAt: String!
+  role: Permission!
+}
+
+input RegisterInput {
+  username: String!
+  email: String!
+  password: String!
+  confirmPassword: String!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
 type Query {
   getLimitItem(limit: Int!): [Item]!
   getItem(_id: ID!): Item!
   getItems: [Item]!
+  me: User
 }
 
 type Mutation {
   createItem(title: String!, description: String!, price: Int!, image: [PhotoInput!]!): Item!
+  register(registerInput: RegisterInput): User!
+  login(loginInput: LoginInput): User!
+  logout: SuccessMessage
 }

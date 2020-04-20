@@ -7,8 +7,74 @@ import Container from "../styles/Container";
 // Component
 import ItemDropdown from "./ItemDropdown";
 import Hamburger from "./Hamburger";
+import User from "../User";
 
+// Link nextjs
 import Link from "next/link";
+import Logout from "../Logout";
+
+export default function Nav() {
+  const [open, setOpen] = useState(false);
+  return (
+    <Header>
+      <User>
+        {({ data }) => {
+          const me = data ? data.me : null;
+          return (
+            <Container fluid>
+              <Inner>
+                <LeftSide>
+                  <Link href="/">
+                    <img src={require("../../public/images/shop-logo-ryder.png")} alt="" />
+                  </Link>
+                  <nav>
+                    <NavLists>
+                      <ItemDropdown
+                        title="SHOP"
+                        list={["all", "new-arrivals", "dresses", "australien-wheels", "tops", "bottoms", "knitwears"]}
+                      />
+                      <ItemDropdown title="OUR WORLD" list={["about-us", "our-store", "for-our-planet", "rendez-vous"]} />
+                    </NavLists>
+                  </nav>
+                </LeftSide>
+                <RightSide>
+                  {me && (
+                    <div className="header__search">
+                      <Link href="/create">
+                        <a>CREATE</a>
+                      </Link>
+                    </div>
+                  )}
+                  <div className="header__search">SEARCH</div>
+                  <div className="header__account">
+                    <Link href={me ? "/account" : "/signup"}>
+                      <a>ACCOUNT</a>
+                    </Link>
+                  </div>
+                  <div className="header__cart">CART</div>
+                  {me && <Logout />}
+                </RightSide>
+              </Inner>
+              {/* Responsive */}
+              <InnerResponsive>
+                <Link href="/">
+                  <img src={require("../../public/images/shop-logo-ryder.png")} alt="" />
+                </Link>
+                <LogoHamburger onClick={() => setOpen(!open)}>
+                  <div className="line"></div>
+                  <div className="line"></div>
+                  <div className="line"></div>
+                </LogoHamburger>
+                <Hamburger open={open} handleHamburger={setOpen} />
+              </InnerResponsive>
+              {/* Responsive */}
+            </Container>
+          );
+        }}
+      </User>
+    </Header>
+  );
+}
 
 const Header = styled.header`
   font-size: 1.2rem;
@@ -46,7 +112,7 @@ const NavLists = styled.nav`
 
 const RightSide = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 100px);
+  grid-template-columns: repeat(auto-fit, 100px);
   justify-content: flex-end;
   justify-items: center;
   align-items: center;
@@ -79,53 +145,3 @@ const LogoHamburger = styled.div`
     background-color: #000;
   }
 `;
-
-export default function Nav() {
-  const [open, setOpen] = useState(false);
-  return (
-    <Header>
-      <Container fluid>
-        <Inner>
-          <LeftSide>
-            <Link href="/">
-              <img src={require("../../public/images/shop-logo-ryder.png")} alt="" />
-            </Link>
-            <nav>
-              <NavLists>
-                <ItemDropdown title="SHOP" list={["all", "new-arrivals", "dresses", "australien-wheels", "tops", "bottoms", "knitwears"]} />
-                <ItemDropdown title="OUR WORLD" list={["about-us", "our-store", "for-our-planet", "rendez-vous"]} />
-              </NavLists>
-            </nav>
-          </LeftSide>
-          <RightSide>
-            <div className="header__search">
-              <Link href="/create">
-                <a>CREATE</a>
-              </Link>
-            </div>
-            <div className="header__search">SEARCH</div>
-            <div className="header__account">
-              <Link href="/account">
-                <a>ACCOUNT</a>
-              </Link>
-            </div>
-            <div className="header__cart">CART</div>
-          </RightSide>
-        </Inner>
-        {/* Responsive */}
-        <InnerResponsive>
-          <Link href="/">
-            <img src={require("../../public/images/shop-logo-ryder.png")} alt="" />
-          </Link>
-          <LogoHamburger onClick={() => setOpen(!open)}>
-            <div className="line"></div>
-            <div className="line"></div>
-            <div className="line"></div>
-          </LogoHamburger>
-          <Hamburger open={open} handleHamburger={setOpen} />
-        </InnerResponsive>
-        {/* Responsive */}
-      </Container>
-    </Header>
-  );
-}

@@ -1,5 +1,10 @@
+// Styled-css
 import styled from "styled-components";
+
+// Link nextjs
 import Link from "next/link";
+
+// Image Arrow
 import arrow from "../../public/svg/arrow-down.svg";
 
 const ItemDropdownStyled = styled.div`

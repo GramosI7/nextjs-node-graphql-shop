@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Container from "../components/styles/Container";
 import Form from "../components/Form/Create/Form";
 
+// CREATE AN ITEM PAGE
+
 export default function create() {
   return (
     <Container>

@@ -1,7 +1,33 @@
-import styled from "styled-components";
-import arrow from "../../public/svg/arrow-down.svg";
-import Link from "next/link";
 import { useState } from "react";
+
+// Styled-css
+import styled from "styled-components";
+
+// Image Arrow
+import arrow from "../../public/svg/arrow-down.svg";
+
+// Link nextjs
+import Link from "next/link";
+
+export default function HamburgerItemDropdown({ title, items }) {
+  const [open, setOpen] = useState(false);
+  return (
+    <HamburgerListItem>
+      <div className="flex" onClick={() => setOpen(!open)}>
+        {title} <ArrowImg src={arrow} alt="" />
+      </div>
+      <DropdownLists open={open}>
+        {items.map((item, index) => (
+          <li key={index}>
+            <Link href={`/items/${item}`}>
+              <a>{item}</a>
+            </Link>
+          </li>
+        ))}
+      </DropdownLists>
+    </HamburgerListItem>
+  );
+}
 
 const DropdownLists = styled.ul`
   text-transform: uppercase;
@@ -50,23 +76,3 @@ const ArrowImg = styled.img`
   transform-origin: center center;
   transition: transform 0.3s ease;
 `;
-
-export default function HamburgerItemDropdown({ title, items }) {
-  const [open, setOpen] = useState(false);
-  return (
-    <HamburgerListItem>
-      <div className="flex" onClick={() => setOpen(!open)}>
-        {title} <ArrowImg src={arrow} alt="" />
-      </div>
-      <DropdownLists open={open}>
-        {items.map((item, index) => (
-          <li key={index}>
-            <Link href={`/items/${item}`}>
-              <a>{item}</a>
-            </Link>
-          </li>
-        ))}
-      </DropdownLists>
-    </HamburgerListItem>
-  );
-}

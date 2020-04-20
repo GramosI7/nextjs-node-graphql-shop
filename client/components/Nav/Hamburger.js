@@ -1,8 +1,14 @@
+// Styled-css
 import styled from "styled-components";
+
+// For animation
 import { motion, AnimatePresence } from "framer-motion";
 
-import cross from "../../public/svg/cross.svg";
+// Component
 import HamburgerItemDropdown from "./HamburgerItemDropdown";
+
+// Imgae cross
+import cross from "../../public/svg/cross.svg";
 
 export default function Hamburger({ open, handleHamburger }) {
   const arrayOne = ["all", "new-arrivals", "dresses", "australien-wheels", "tops", "bottoms", "knitwears"];
@@ -45,22 +51,22 @@ const fadeRight = {
   },
 };
 
-const fade = {
-  visible: {
-    display: "block",
-    opacity: 1,
-    transition: {
-      duration: 0.4,
-    },
-  },
-  hidden: {
-    display: "none",
-    opacity: 0,
-    transition: {
-      duration: 0.4,
-    },
-  },
-};
+// const fade = {
+//   visible: {
+//     display: "block",
+//     opacity: 1,
+//     transition: {
+//       duration: 0.4,
+//     },
+//   },
+//   hidden: {
+//     display: "none",
+//     opacity: 0,
+//     transition: {
+//       duration: 0.4,
+//     },
+//   },
+// };
 
 const ContainerHamburger = styled(motion.div)`
   overflow: hidden;

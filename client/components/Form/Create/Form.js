@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+
+// Styled-css
 import styled from "styled-components";
+
+// Next router
 import { useRouter } from "next/router";
 
 // Graphql

@@ -1,10 +1,19 @@
+// Tools Graphql
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import GuideSize from "./GuideSize";
-import Container from "./styles/Container";
-import Link from "next/link";
+
+// Styled-css
 import styled from "styled-components";
+
+// Linj nextjs
+import Link from "next/link";
+
+// Styled Components
+import Container from "./styles/Container";
 import { TitleH4 } from "./styles/Title";
+
+// Components
+import GuideSize from "./GuideSize";
 import SuccessMessage from "./SuccessMessage";
 
 const ITEM_QUERY = gql`
@@ -22,6 +31,7 @@ const ITEM_QUERY = gql`
   }
 `;
 
+// TODO: Format price with function in utils
 export default function PageItem({ id, message }) {
   const { loading, error, data } = useQuery(ITEM_QUERY, {
     variables: { _id: id },

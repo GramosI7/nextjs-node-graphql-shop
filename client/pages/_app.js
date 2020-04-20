@@ -1,6 +1,6 @@
 import App from "next/app";
 
-// Graphql
+// Graphql tools
 import { ApolloProvider } from "react-apollo";
 import withData from "../lib/withData";
 import "react-quill/dist/quill.snow.css";

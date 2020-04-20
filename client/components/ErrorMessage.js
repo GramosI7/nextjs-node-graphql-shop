@@ -1,4 +1,4 @@
-import React from "react";
+// Styled-css
 import styled from "styled-components";
 
 export default function ErrorMessage({ children }) {

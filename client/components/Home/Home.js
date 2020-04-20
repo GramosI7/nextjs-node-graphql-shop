@@ -1,9 +1,11 @@
-import React from "react";
+// Router next
 import Link from "next/link";
 
+// Graphql Tools
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+// Styled-css
 import styled from "styled-components";
 
 const LIMIT_ITEM_QUERY = gql`

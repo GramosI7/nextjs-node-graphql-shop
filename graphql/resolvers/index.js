@@ -1,15 +1,14 @@
 import itemResolvers from "./item";
+import userResolvers from "./user";
 
 export default {
-  // Post: {
-  //   likeCount: parent => parent.likes.length,
-  //   commentCount: parent => parent.comments.length
-  // },
   Query: {
     ...itemResolvers.Query,
+    ...userResolvers.Query,
   },
   Mutation: {
     ...itemResolvers.Mutation,
+    ...userResolvers.Mutation,
   },
   // Subscription: {
   //   ...postsResolvers.Subcription

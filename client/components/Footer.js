@@ -1,36 +1,8 @@
+// Styled-css
 import styled from "styled-components";
+
+// Styled component
 import Container from "./styles/Container";
-
-const FooterStyled = styled.footer`
-  font-size: 1rem;
-  font-weight: 300;
-`;
-
-const Inner = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  justify-items: center;
-  justify-content: center;
-  @media (max-width: 660px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const Lists = styled.ul`
-  margin-top: 20px;
-  list-style: none;
-  display: grid;
-  grid-template-rows: repeat(auto-fit, 29px);
-  @media (max-width: 660px) {
-    justify-items: center;
-  }
-  li {
-    padding: 5px;
-    &:first-child {
-      font-weight: 600;
-    }
-  }
-`;
 
 export default function Footer() {
   return (
@@ -72,3 +44,34 @@ export default function Footer() {
     </FooterStyled>
   );
 }
+
+const FooterStyled = styled.footer`
+  font-size: 1rem;
+  font-weight: 300;
+`;
+
+const Inner = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  justify-content: center;
+  @media (max-width: 660px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
+
+const Lists = styled.ul`
+  margin-top: 20px;
+  list-style: none;
+  display: grid;
+  grid-template-rows: repeat(auto-fit, 29px);
+  @media (max-width: 660px) {
+    justify-items: center;
+  }
+  li {
+    padding: 5px;
+    &:first-child {
+      font-weight: 600;
+    }
+  }
+`;

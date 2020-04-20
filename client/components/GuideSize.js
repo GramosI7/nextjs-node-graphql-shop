@@ -1,6 +1,7 @@
-import React from "react";
+// Styled-css
 import styled from "styled-components";
 
+// TODO: Need to transform responsive and clean
 export default function GuideSize() {
   return (
     <Table width="416" height="77">

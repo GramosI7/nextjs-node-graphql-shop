@@ -5,6 +5,7 @@ import TitleH1 from "../components/styles/Title";
 // Component
 import Home from "../components/Home/Home";
 
+// HOME PAGE
 export default function index() {
   return (
     <Container>

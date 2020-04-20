@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
+
+// Styled-css
 import styled from "styled-components";
+
+// For ssr render
+import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -15,23 +19,17 @@ const modules = {
     ["clean"],
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 };
-/*
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
+
 const formats = ["header", "font", "size", "bold", "italic", "underline", "strike", "blockquote", "list", "bullet", "indent"];
 
 export default ({ handleChange, valueProps, error }) => {
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    // console.log(value);
     handleChange({ ...valueProps, description: value });
-    // console.log(valueProps);
   }, [value]);
 
   return (

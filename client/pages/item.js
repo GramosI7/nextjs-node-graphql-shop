@@ -1,6 +1,6 @@
-import React from "react";
 import PageItem from "../components/PageItem";
 
+// SEE INFORMATION TO PRODUCT
 export default function item({ query }) {
   return (
     <div>

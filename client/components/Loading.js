@@ -1,4 +1,15 @@
+// Styled-css
 import styled from "styled-components";
+
+// TODO: modern loading
+
+export default function Loading() {
+  return (
+    <FixedContainer>
+      <Title>Loading ...</Title>
+    </FixedContainer>
+  );
+}
 
 const FixedContainer = styled.div`
   position: fixed;
@@ -17,11 +28,3 @@ const Title = styled.h1`
   align-items: center;
   justify-content: center;
 `;
-
-export default function Loading() {
-  return (
-    <FixedContainer>
-      <Title>Loading ...</Title>
-    </FixedContainer>
-  );
-}

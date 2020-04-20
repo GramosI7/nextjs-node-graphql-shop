@@ -1,6 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
+// Lib dropZoneReact
 import { useDropzone } from "react-dropzone";
+
+// Styled-css
 import styled from "styled-components";
+
+// Image Cross
 import cross from "../../../public/svg/cross.svg";
 
 export default function Dropzone({ preview, setPreviewImg, error }) {
