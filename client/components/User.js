@@ -16,7 +16,6 @@ const CURRENT_USER_QUERY = gql`
 
 export default function User({ children }) {
   const payload = useQuery(CURRENT_USER_QUERY);
-  console.log(payload);
   return <div>{children(payload)}</div>;
 }
 

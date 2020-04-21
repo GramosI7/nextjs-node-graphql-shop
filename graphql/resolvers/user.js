@@ -9,14 +9,24 @@ import { UserInputError } from "apollo-server-core";
 
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { hasPermission } from "../../utils/hasPermission";
 
 export default {
   Query: {
-    async me(parent, args, ctx, info) {
+    async me(_, __, ctx) {
       if (!ctx.request.userId) {
         return null;
       }
       return await User.findById(ctx.request.userId);
+    },
+    async users(_, __, ctx) {
+      if (!ctx.request.userId) {
+        throw new Error("Sorry, you must be logged in to do that !");
+      }
+
+      hasPermission(ctx.request.user, "ROOT");
+
+      return await User.find({ role: { $ne: "ROOT" } });
     },
   },
   Mutation: {
@@ -24,7 +34,6 @@ export default {
       const { valid, errors } = validateRegisterInput(username, email, password, confirmPassword);
       if (!valid) throw new UserInputError("Errors !", { errors });
 
-      // console.log(username, email, password, confirmPassword);
       const isUsername = await User.findOne({ username });
 
       if (isUsername) {
@@ -50,7 +59,7 @@ export default {
         email,
         username,
         password,
-        role: "ADMIN",
+        role: "USER",
         createdAt: new Date().toISOString(),
       });
 
@@ -103,6 +112,23 @@ export default {
     logout(_, __, ctx) {
       ctx.response.clearCookie("token");
       return { message: "Goodbye!" };
+    },
+    async updatePermission(_, { permission, _id }, ctx) {
+      if (!ctx.request.userId) {
+        throw new Error("Sorry, you must be logged in to do that !");
+      }
+
+      hasPermission(ctx.request.user, "ROOT");
+
+      const userUpdate = await User.findByIdAndUpdate(
+        _id,
+        { role: permission },
+        {
+          new: true,
+        }
+      );
+
+      return userUpdate;
     },
   },
 };

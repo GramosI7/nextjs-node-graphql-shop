@@ -6,6 +6,7 @@ enum Gender {
 enum Permission {
   ADMIN
   USER
+  ROOT
 }
 
 type SuccessMessage {
@@ -57,6 +58,7 @@ type Query {
   getItem(_id: ID!): Item!
   getItems: [Item]!
   me: User
+  users: [User]!
 }
 
 type Mutation {
@@ -64,4 +66,5 @@ type Mutation {
   register(registerInput: RegisterInput): User!
   login(loginInput: LoginInput): User!
   logout: SuccessMessage
+  updatePermission(_id: ID!, permission: Permission!): User
 }

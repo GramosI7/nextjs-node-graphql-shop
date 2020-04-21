@@ -5,6 +5,8 @@ import { valideCreateItem } from "../../utils/validators/item";
 // Error from Apollo
 import { UserInputError } from "apollo-server-core";
 
+import { hasPermission } from "../../utils/hasPermission";
+
 export default {
   Query: {
     async getItem(_, { _id }) {
@@ -22,6 +24,12 @@ export default {
   },
   Mutation: {
     async createItem(_, { title, description, price, image }) {
+      if (!ctx.request.userId) {
+        throw new Error("Sorry, you must be logged in to do that !");
+      }
+
+      hasPermission(ctx.request.user, "ROOT");
+
       const { valid, errors } = valideCreateItem(title, description, price, image);
       if (!valid) throw new UserInputError("Errors !", { errors });
 
