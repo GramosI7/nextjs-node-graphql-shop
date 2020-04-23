@@ -23,7 +23,16 @@ export default {
     },
   },
   Mutation: {
-    async createItem(_, { title, description, price, image }) {
+    async deleteItem(_, { _id }, ctx) {
+      if (!ctx.request.userId) {
+        throw new Error("Sorry, you must be logged in to do that !");
+      }
+
+      hasPermission(ctx.request.user, "ROOT");
+
+      return await Item.findByIdAndDelete(_id);
+    },
+    async createItem(_, { title, description, price, image }, ctx) {
       if (!ctx.request.userId) {
         throw new Error("Sorry, you must be logged in to do that !");
       }

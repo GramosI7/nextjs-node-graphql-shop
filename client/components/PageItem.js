@@ -15,6 +15,7 @@ import { TitleH4 } from "./styles/Title";
 // Components
 import GuideSize from "./GuideSize";
 import SuccessMessage from "./SuccessMessage";
+import PleaseSignIn from "./PleaseSignIn";
 
 const ITEM_QUERY = gql`
   query getItem($_id: ID!) {
@@ -46,6 +47,13 @@ export default function PageItem({ id, message }) {
     <Container>
       {message && <SuccessMessage>{message}</SuccessMessage>}
       <Inner>
+        <PleaseSignIn permissions={["ROOT", "ADMIN"]} empty>
+          <ContainerButtonEdit>
+            <button>Modify</button>
+            <button>Delete</button>
+          </ContainerButtonEdit>
+        </PleaseSignIn>
+
         <TopImg src={getItem.image[0].url} alt="image clothes" />
         <TitleH4>{getItem.title}</TitleH4>
         <WrapperPrice>
@@ -170,5 +178,29 @@ const ContainerImgBottom = styled.div`
   }
   img {
     width: 100%;
+  }
+`;
+
+const ContainerButtonEdit = styled.div`
+  padding: 20px 0;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, 200px);
+  gap: 20px;
+  button {
+    justify-self: center;
+    font-size: 1.2rem;
+    padding: 10px 40px;
+    font-weight: 700;
+    background-color: #fff;
+    text-transform: uppercase;
+  }
+  button:nth-child(1) {
+    border: 1px solid blue;
+    color: blue;
+  }
+  button:nth-child(2) {
+    border: 1px solid red;
+    color: red;
   }
 `;

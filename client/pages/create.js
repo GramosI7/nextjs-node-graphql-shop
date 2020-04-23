@@ -4,10 +4,9 @@ import Form from "../components/Form/Create/Form";
 import PleaseSignIn from "../components/PleaseSignIn";
 
 // CREATE AN ITEM PAGE
-
 export default function create() {
   return (
-    <PleaseSignIn>
+    <PleaseSignIn permissions={["ROOT", "ADMIN"]}>
       <Container>
         <Title>Add an article</Title>
         <Form />

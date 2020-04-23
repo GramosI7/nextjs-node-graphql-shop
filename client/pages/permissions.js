@@ -6,7 +6,7 @@ import TabPermission from "../components/Permissions/TabPermission";
 
 export default function permissions() {
   return (
-    <PleaseSignIn>
+    <PleaseSignIn permissions={["ROOT"]}>
       <Container>
         <TitleH1>Permissions</TitleH1>
         <TabPermission />

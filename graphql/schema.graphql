@@ -62,6 +62,7 @@ type Query {
 }
 
 type Mutation {
+  deleteItem(_id: ID!): Item!
   createItem(title: String!, description: String!, price: Int!, image: [PhotoInput!]!): Item!
   register(registerInput: RegisterInput): User!
   login(loginInput: LoginInput): User!

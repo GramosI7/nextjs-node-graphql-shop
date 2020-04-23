@@ -12,6 +12,7 @@ import User from "../User";
 // Link nextjs
 import Link from "next/link";
 import Logout from "../Logout";
+import { hasPermission } from "../../utils/hasPermission";
 
 export default function Nav() {
   const [open, setOpen] = useState(false);
@@ -38,7 +39,7 @@ export default function Nav() {
                   </nav>
                 </LeftSide>
                 <RightSide>
-                  {me && (
+                  {me && hasPermission(me, ["ROOT", "ADMIN"]) && (
                     <div className="header__search">
                       <Link href="/create">
                         <a>CREATE</a>
