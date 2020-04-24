@@ -1,3 +1,4 @@
+// Component styled
 import PageItem from "../components/PageItem";
 
 // SEE INFORMATION TO PRODUCT

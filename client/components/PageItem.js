@@ -1,5 +1,5 @@
 // Tools Graphql
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery, useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
 // Styled-css
@@ -7,6 +7,7 @@ import styled from "styled-components";
 
 // Linj nextjs
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 // Styled Components
 import Container from "./styles/Container";
@@ -16,6 +17,7 @@ import { TitleH4 } from "./styles/Title";
 import GuideSize from "./GuideSize";
 import SuccessMessage from "./SuccessMessage";
 import PleaseSignIn from "./PleaseSignIn";
+import ErrorMessage from "./ErrorMessage";
 
 const ITEM_QUERY = gql`
   query getItem($_id: ID!) {
@@ -32,6 +34,17 @@ const ITEM_QUERY = gql`
   }
 `;
 
+const DELETE_ITEM_MUTATION = gql`
+  mutation DELETE_ITEM_MUTATION($_id: ID!) {
+    deleteItem(_id: $_id) {
+      _id
+      title
+      description
+      price
+    }
+  }
+`;
+
 // TODO: Format price with function in utils
 export default function PageItem({ id, message }) {
   const { loading, error, data } = useQuery(ITEM_QUERY, {
@@ -39,7 +52,7 @@ export default function PageItem({ id, message }) {
   });
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <p>Error : {error}</p>;
+  if (error) return <p>Error : {error.graphQLErrors[0].extensions.general}</p>;
 
   const { getItem } = data;
 
@@ -48,10 +61,7 @@ export default function PageItem({ id, message }) {
       {message && <SuccessMessage>{message}</SuccessMessage>}
       <Inner>
         <PleaseSignIn permissions={["ROOT", "ADMIN"]} empty>
-          <ContainerButtonEdit>
-            <button>Modify</button>
-            <button>Delete</button>
-          </ContainerButtonEdit>
+          <ButtonDelete id={getItem._id} />
         </PleaseSignIn>
 
         <TopImg src={getItem.image[0].url} alt="image clothes" />
@@ -181,26 +191,70 @@ const ContainerImgBottom = styled.div`
   }
 `;
 
+function ButtonDelete({ id }) {
+  const router = useRouter();
+
+  const [deleteItem, { loading, error }] = useMutation(DELETE_ITEM_MUTATION, {
+    update(_, { data }) {
+      console.log(data);
+      router.push({
+        pathname: "/",
+      });
+    },
+    onError(err) {
+      console.log(err.graphQLErrors);
+    },
+    variables: { _id: id },
+  });
+
+  return (
+    <ContainerButtonEdit>
+      {loading && <p>Loading...</p>}
+      <InnerButton>
+        <Link
+          href={{
+            pathname: "/modify",
+            query: { id },
+          }}
+        >
+          <a>
+            <button>Modify</button>
+          </a>
+        </Link>
+
+        <button onClick={() => deleteItem()}>Delete</button>
+      </InnerButton>
+      {error && <ErrorMessage>Error: {error.graphQLErrors[0].message}</ErrorMessage>}
+    </ContainerButtonEdit>
+  );
+}
+
 const ContainerButtonEdit = styled.div`
   padding: 20px 0;
+  text-align: center;
+`;
+
+const InnerButton = styled.div`
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(2, 200px);
   gap: 20px;
   button {
+    cursor: pointer;
     justify-self: center;
     font-size: 1.2rem;
     padding: 10px 40px;
     font-weight: 700;
     background-color: #fff;
     text-transform: uppercase;
-  }
-  button:nth-child(1) {
-    border: 1px solid blue;
-    color: blue;
-  }
-  button:nth-child(2) {
-    border: 1px solid red;
-    color: red;
+    height: 40px;
+    &:nth-child(1) {
+      color: blue;
+      border: 1px solid blue;
+    }
+    &:nth-child(2) {
+      color: red;
+      border: 1px solid red;
+    }
   }
 `;

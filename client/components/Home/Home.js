@@ -29,7 +29,7 @@ export default function Home() {
   });
 
   if (loading) return <div>Loading...</div>;
-  if (error) return <p>Error : {error}</p>;
+  if (error) return <p>Error : {error.graphQLErrors[0].extensions.general}</p>;
 
   return (
     <div>

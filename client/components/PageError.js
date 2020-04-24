@@ -1,5 +1,7 @@
-import React from "react";
+// styled css
 import styled from "styled-components";
+
+// Component styled
 import Container from "./styles/Container";
 
 export default function PageError({ children }) {

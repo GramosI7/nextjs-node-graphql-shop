@@ -1,10 +1,20 @@
-export const hasPermission = (user, permission) => {
-  // console.log(user.role !== permission);
-  if (user.role !== permission) {
+export const hasPermission = (user, permissionsNeeded) => {
+  const matchedPermissions = [];
+
+  permissionsNeeded.forEach((element, index) => {
+    if (element === user.role) {
+      matchedPermissions.push(element);
+    }
+  });
+
+  // if is good go return true
+  if (matchedPermissions.length) {
+    return true;
+  } else {
     throw new Error(`You do not have sufficient permissions
-      : ${permission}
-      You Have:
-      ${user.role}
-      `);
+    : ${permissionsNeeded}
+    You Have:
+    ${user.role}
+    `);
   }
 };

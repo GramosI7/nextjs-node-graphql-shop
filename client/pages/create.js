@@ -1,5 +1,10 @@
+// Styled-css
 import styled from "styled-components";
+
+// Styled component
 import Container from "../components/styles/Container";
+
+// Component
 import Form from "../components/Form/Create/Form";
 import PleaseSignIn from "../components/PleaseSignIn";
 

@@ -1,6 +1,8 @@
-import React from "react";
+// Styled component
 import Container from "../components/styles/Container";
 import TitleH1 from "../components/styles/Title";
+
+// Component
 import Form from "../components/Form/SignIn/Form";
 
 export default function signin() {

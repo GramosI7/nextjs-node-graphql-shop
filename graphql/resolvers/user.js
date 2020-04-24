@@ -24,8 +24,7 @@ export default {
         throw new Error("Sorry, you must be logged in to do that !");
       }
 
-      hasPermission(ctx.request.user, "ROOT");
-
+      hasPermission(ctx.request.user, ["ROOT"]);
       return await User.find({ role: { $ne: "ROOT" } });
     },
   },

@@ -1,10 +1,11 @@
-import React from "react";
-
+// Tools Graphql
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
 
+// Linj nextjs
 import { useRouter } from "next/router";
 
+// QUERY USER
 import { CURRENT_USER_QUERY } from "./User";
 
 const SIGN_OUT_MUTATION = gql`
@@ -18,9 +19,9 @@ const SIGN_OUT_MUTATION = gql`
 export default function Logout() {
   const router = useRouter();
 
-  const [userLogout, { loading }] = useMutation(SIGN_OUT_MUTATION, {
+  const [userLogout] = useMutation(SIGN_OUT_MUTATION, {
     update(_, { data }) {
-      console.log(data);
+      console.log("logout", data);
       router.push({
         pathname: "/",
       });

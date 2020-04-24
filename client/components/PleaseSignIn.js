@@ -1,20 +1,20 @@
-import React from "react";
-
+// graphql Tools
 import { useQuery } from "@apollo/react-hooks";
-
-import Form from "./Form/SignIn/Form";
-
 import { CURRENT_USER_QUERY } from "./User";
-import Container from "./styles/Container";
 
+// Styled css
 import styled from "styled-components";
+
+// Styled component
+import Container from "./styles/Container";
 import PageError from "./PageError";
-import { empty } from "apollo-boost";
+
+// Component
+import Form from "./Form/SignIn/Form";
 
 export default function PleaseSignIn({ children, permissions = ["USER"], empty }) {
   const { data, loading } = useQuery(CURRENT_USER_QUERY);
 
-  // console.log(empty);
   if (data && !data.me && empty) return null;
 
   if (loading) return <div>Loading...</div>;
