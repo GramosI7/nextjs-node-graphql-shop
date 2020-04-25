@@ -7,6 +7,7 @@ import Container from "../../components/styles/Container";
 import TitleH1 from "../../components/styles/Title";
 import styled from "styled-components";
 import Link from "next/link";
+import Loading from "../../components/Loading";
 
 const GET_ITEMS_QUERY = gql`
   query getItems {
@@ -25,7 +26,7 @@ const GET_ITEMS_QUERY = gql`
 export default function all() {
   const { loading, error, data } = useQuery(GET_ITEMS_QUERY);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <p>Error : {error.graphQLErrors[0].extensions.general}</p>;
 
   return (

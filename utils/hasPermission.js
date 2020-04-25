@@ -1,3 +1,5 @@
+import { UserInputError } from "apollo-server-core";
+
 export const hasPermission = (user, permissionsNeeded) => {
   const matchedPermissions = [];
 
@@ -11,10 +13,8 @@ export const hasPermission = (user, permissionsNeeded) => {
   if (matchedPermissions.length) {
     return true;
   } else {
-    throw new Error(`You do not have sufficient permissions
-    : ${permissionsNeeded}
-    You Have:
-    ${user.role}
-    `);
+    throw new UserInputError("Errors !", {
+      general: `You do not have sufficient permissions: ${permissionsNeeded}. You have: ${user.role}`,
+    });
   }
 };

@@ -11,13 +11,14 @@ import PageError from "./PageError";
 
 // Component
 import Form from "./Form/SignIn/Form";
+import Loading from "./Loading";
 
 export default function PleaseSignIn({ children, permissions = ["USER"], empty }) {
   const { data, loading } = useQuery(CURRENT_USER_QUERY);
 
   if (data && !data.me && empty) return null;
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (data && !data.me) {
     return (
       <Container>

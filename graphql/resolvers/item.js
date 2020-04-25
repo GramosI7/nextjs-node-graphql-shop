@@ -35,7 +35,7 @@ export default {
   Mutation: {
     async deleteItem(_, { _id }, ctx) {
       if (!ctx.request.userId) {
-        throw new Error("Sorry, you must be logged in to do that !");
+        throw new UserInputError("Errors !", { general: "Sorry, you must be logged in to do that !" });
       }
 
       hasPermission(ctx.request.user, ["ADMIN"]);
@@ -63,7 +63,7 @@ export default {
       };
 
       try {
-        const itemUpdate = Item.findByIdAndUpdate(_id, { $set: contenuFields }, { new: true, upsert: true });
+        return await Item.findByIdAndUpdate(_id, { $set: contenuFields }, { new: true, upsert: true });
       } catch (error) {
         throw new Error("Error, some error in db !");
       }

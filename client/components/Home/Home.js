@@ -7,6 +7,7 @@ import gql from "graphql-tag";
 
 // Styled-css
 import styled from "styled-components";
+import Loading from "../Loading";
 
 const LIMIT_ITEM_QUERY = gql`
   query getLimitItem($limit: Int!) {
@@ -28,7 +29,7 @@ export default function Home() {
     variables: { limit: 10 },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <p>Error : {error.graphQLErrors[0].extensions.general}</p>;
 
   return (

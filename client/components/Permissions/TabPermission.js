@@ -7,6 +7,7 @@ import ErrorMessage from "../ErrorMessage";
 import styled from "styled-components";
 import UserPermission from "./UserPermission";
 import PageError from "../PageError";
+import Loading from "../Loading";
 
 const USERS_QUERY = gql`
   query users {
@@ -22,7 +23,7 @@ const USERS_QUERY = gql`
 export default function TabPermission() {
   const { loading, error, data } = useQuery(USERS_QUERY);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <Loading />;
   if (error) return <PageError>Error: {error.graphQLErrors[0].message}</PageError>;
 
   return (

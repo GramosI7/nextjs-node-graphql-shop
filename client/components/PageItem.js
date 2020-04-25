@@ -18,6 +18,7 @@ import GuideSize from "./GuideSize";
 import SuccessMessage from "./SuccessMessage";
 import PleaseSignIn from "./PleaseSignIn";
 import ErrorMessage from "./ErrorMessage";
+import Loading from "./Loading";
 
 const ITEM_QUERY = gql`
   query getItem($_id: ID!) {
@@ -51,7 +52,7 @@ export default function PageItem({ id, message }) {
     variables: { _id: id },
   });
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <Loading />;
   if (error) return <p>Error : {error.graphQLErrors[0].extensions.general}</p>;
 
   const { getItem } = data;
@@ -209,7 +210,7 @@ function ButtonDelete({ id }) {
 
   return (
     <ContainerButtonEdit>
-      {loading && <p>Loading...</p>}
+      {loading && <Loading />}
       <InnerButton>
         <Link
           href={{
@@ -224,7 +225,7 @@ function ButtonDelete({ id }) {
 
         <button onClick={() => deleteItem()}>Delete</button>
       </InnerButton>
-      {error && <ErrorMessage>Error: {error.graphQLErrors[0].message}</ErrorMessage>}
+      {error && <ErrorMessage>Error: {error.graphQLErrors[0].extensions.general}</ErrorMessage>}
     </ContainerButtonEdit>
   );
 }
