@@ -18,7 +18,7 @@
     "axios": "^0.19.2",
     "framer-motion": "^1.10.3",
     "graphql-tag": "^2.10.3",
-    "next": "^9.3.4",
+    "next": "^13.0.3",
     "next-images": "^1.4.0",
     "next-with-apollo": "^5.0.0",
     "react": "^16.13.1",
